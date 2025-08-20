@@ -1,0 +1,17 @@
+
+ -> manage homepage
+ -> manage all users
+ -> view all blogs
+ -> view all Payment
+ -> manage program
+ -> manage workshop
+
+
+ user
+ -> homepage
+ -> blogs => done
+ -> program
+ -> chat with ai
+ -> contact us / drop your review
+
+ 
