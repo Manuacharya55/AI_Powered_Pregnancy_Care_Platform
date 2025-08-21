@@ -12,7 +12,7 @@ export const fetchAllBlogs = AsyncHandler(async (req, res) => {
   const limit = Number(req.query.limit) || 12;
   const skip = (page - 1) * 10;
 
-  const blogs = await Blog.find({ author: { $ne: _id }, isActive: true })
+  const blogs = await Blog.find({ author: { $ne: _id }, isActive: true }).populate("author")
     .skip(skip)
     .limit(limit);
 
@@ -29,7 +29,7 @@ export const fetchSingleBlog = AsyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid ID");
   }
 
-  const blog = await Blog.findById(id);
+  const blog = await Blog.findById(id).populate("author");
 
   if (!blog) {
     throw new ApiError(400, "No Such Blogs");

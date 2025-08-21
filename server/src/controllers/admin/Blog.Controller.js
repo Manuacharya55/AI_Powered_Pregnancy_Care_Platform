@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Blog from "../../models/Blog.Model.js";
 import { ApiError } from "../../utils/ApiError.js";
 import { ApiSuccess } from "../../utils/ApiSuccess.js";
+import { AsyncHandler } from "../../utils/AsyncHandler.js";
 
 // fetch all blogs - (Active or Inactive)
 export const getAllBlog = AsyncHandler(async (req, res) => {
@@ -24,7 +25,7 @@ export const fetchSingleBlog = AsyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid ID");
   }
 
-  const blog = await Blog.findById(id);
+  const blog = await Blog.findById(id).populate("author");
 
   if (!blog) {
     throw new ApiError(400, "No Such Blogs");

@@ -9,6 +9,7 @@ import { connectDB } from "./database/db.js";
 // Routes Import
 import AuthRouter from "./routes/Auth.router.js";
 import BlogRouter from "./routes/Blog.Router.js";
+import HomePageRouter from "./routes/HomePage.Router.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,6 +25,8 @@ app.get("/api/v1/auth",(req,res)=>{
 
 app.use("/api/v1/auth",AuthRouter)
 app.use("/api/v1/blog",BlogRouter)
+app.use("/api/v1/homepage",HomePageRouter)
+
 
 
 app.use(GlobalError)
