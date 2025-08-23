@@ -4,6 +4,8 @@
 @import url('./styles/navbar.css');
 @import url('./styles/homepage.css');
 @import url('./styles/blog.css');
+@import url('./styles/profile.css');
+@import url('./styles/dashboard.css');
 
 :root {
   --background-color: #1f1f1f;
@@ -38,10 +40,10 @@ body,
 #page{
   z-index: 5;
 }
+
 #container{
   max-width: 1400px;
   width: 100%;
-  height: 100%;
   display: block;
   margin: auto;
   display: flex;
@@ -49,7 +51,8 @@ body,
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  /* border: 1px solid white; */
+  z-index: 5;
+  position: relative;
 }
 
 a{
@@ -74,3 +77,4 @@ a{
 #back:hover{
   background-color: var(--accent-color);
 }
+

@@ -23,7 +23,9 @@ const useAxios = () => {
       });
 
       if(response.data.success){
-        setResponse(response.data.data)
+        console.log(response.data)
+        setResponse(response.data)
+        return response.data
       }else{
         setError(response.data.message)
       }

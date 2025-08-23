@@ -4,7 +4,7 @@ import { handleUpload } from "../../utils/Appwrite";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import useAxios from "../../hooks/useAxios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditBlog = () => {
   const [title, setTitle] = useState("");
@@ -13,36 +13,29 @@ const EditBlog = () => {
   const { user } = useAuth();
   const { response, error, loading, handleRequest } = useAxios();
 
-  const{id} = useParams();
-
+  const navigate = useNavigate()
+  const { id } = useParams();
 
   const fetchData = async () => {
     if (!user?.token) return;
 
-    await handleRequest({
+    const response = await handleRequest({
       method: "get",
       url: `blog/${id}`,
       token: user?.token,
     });
 
-   setTitle(response?.title)
-   setImage(response?.image)
-   setDescription(response?.description)
+    console.log(response);
+    setTitle(response?.data?.title);
+    setImage(response?.data?.image);
+    setDescription(response?.data?.description);
   };
 
-  useEffect(()=>{
-    if(user?.token){
-        fetchData()
-    }
-  },[user?.token]);
-
   useEffect(() => {
-  if (response) {
-    setTitle(response.title);
-    setImage(response.image);
-    setDescription(response.description);
-  }
-}, [response]);
+    if (user?.token) {
+      fetchData();
+    }
+  }, [user?.token]);
 
 
   const handleChange = async (e) => {
@@ -69,6 +62,7 @@ const EditBlog = () => {
     if (!title || !description || !image) {
       return;
     }
+    console.log("heyyyy");
 
     if (!user?.token) {
       return;
@@ -82,7 +76,8 @@ const EditBlog = () => {
     });
 
     console.log(response);
-    if(!error) toast.success("done")
+    if (!error) toast.success("done");
+    navigate(-1)
   };
 
   return (

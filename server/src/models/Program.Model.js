@@ -13,6 +13,10 @@ const ProgramSchema = new Schema({
     type: Number,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   weeks: [{ type: Schema.Types.ObjectId, ref: "Weeks" }],
   review: [
     {
@@ -34,7 +38,7 @@ const ProgramSchema = new Schema({
       },
     },
   ],
-});
+},{timestamps:true});
 
 const Program = model("Program", ProgramSchema);
 export default Program;

@@ -24,7 +24,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleRequest({
+    const response = await handleRequest({
       method: "post",
       url: "auth/login",
       data: user,
@@ -35,9 +35,9 @@ const Login = () => {
       email: "",
       password: "",
     });
-    setLocalStorage(response);
-    navigate("/home");
     console.log(response);
+    setLocalStorage(response.data);
+    navigate("/home");
   };
 
   return (

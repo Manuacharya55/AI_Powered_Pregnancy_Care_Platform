@@ -15,11 +15,14 @@ const ViewSingleBlog = () => {
   const fetchBlogs = async () => {
     if (!user?.token || !user || !id) return;
 
-    await handleRequest({
+    const response = await handleRequest({
       method: "get",
       url: `blog/${id}`,
       token: user?.token,
     });
+
+    console.log(response)
+    setBlogs(response.data)
   };
 
   useEffect(() => {
@@ -42,24 +45,24 @@ const ViewSingleBlog = () => {
       <div id="blog-holder">
         <Back/>
         <div id="container">
-          <h1>{response?.title}</h1>
+          <h1>{blogs?.title}</h1>
 
           <div id="image-holder">
-            <img src={response?.image} alt="" />
+            <img src={blogs?.image} alt="" />
           </div>
 
           <div
             id="blog-description"
-            dangerouslySetInnerHTML={{ __html: response?.description }}
+            dangerouslySetInnerHTML={{ __html: blogs?.description }}
           ></div>
           <div id="details">
             <div id="user-profile">
-              <img src={response?.author?.avatar} alt="" />
+              <img src={blogs?.author?.avatar} alt="" />
             </div>
             <div id="user-description">
-              <span>{response?.author?.name}</span>
-              <span>{response?.createdAt.split("T")[0]}</span>
-              <span>{response?.author?.email}</span>
+              <span>{blogs?.author?.name}</span>
+              <span>{blogs?.createdAt?.split("T")[0]}</span>
+              <span>{blogs?.author?.email}</span>
             </div>
           </div>
         </div>

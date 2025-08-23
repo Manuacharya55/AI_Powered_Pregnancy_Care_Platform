@@ -7,13 +7,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const setLocalStorage = (data) => {
-    const { _id, name, email, isAdmin, token } = data;
+    const { _id, name, email, isAdmin, token ,avatar} = data;
     localStorage.setItem("user", JSON.stringify({
       _id,
       name,
       email,
       isAdmin,
       token,
+      avatar
     }));
     setUser({ _id, name, email, isAdmin, token });
   };

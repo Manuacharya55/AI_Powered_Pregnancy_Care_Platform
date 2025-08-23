@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 export const verifyJWT = AsyncHandler(async(req,res,next)=>{
     const token = req.header("auth-token");
 
-    console.log("hiii");
+    
 
     if(!token){
         throw new ApiError(400,"No Token Sent")
@@ -28,11 +28,13 @@ export const verifyJWT = AsyncHandler(async(req,res,next)=>{
 
  
     req.user = existingUser;
+    console.log("hiii");
 
     next();
 })
 
 export const verifyAdmin = AsyncHandler(async(req,res,next)=>{
+    console.log("heyyyy")
     if(!req.user.isAdmin){
         throw new ApiError(403,"Forbidden Access")
     }

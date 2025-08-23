@@ -13,11 +13,13 @@ const ViewBlog = () => {
   const fetchBlogs = async () => {
     if (!user?.token || !user) return;
 
-    await handleRequest({
+    const response = await handleRequest({
       method: "get",
       url: "blog/",
       token: user?.token,
     });
+
+    setBlogs(response.data)
   };
 
   useEffect(() => {
@@ -40,9 +42,9 @@ const ViewBlog = () => {
           See what’s on everyone’s mind
         </span>
 
-        {response?.length > 0 ? (
+        {blogs?.length > 0 ? (
           <div id="container">
-            {response.map((curele) => (
+            {blogs.map((curele) => (
               <NavLink to={`/blog/${curele._id}`} id="blog-card">
                 <BlogCard key={curele._id} data={curele} />
               </NavLink>

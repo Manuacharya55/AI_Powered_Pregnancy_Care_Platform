@@ -52,7 +52,7 @@ export const loginUser = AsyncHandler(async (req, res) => {
   if (!isMatch) {
     throw new ApiError(400, "Invalid Credentials");
   }
-
+  
   const token = await existingUser.generateToken();
   const userObj = existingUser.toObject();
   delete userObj.password;
@@ -77,7 +77,7 @@ export const getProfile = AsyncHandler(async (req, res) => {
     throw new ApiError(400, "No Such User Exists");
   }
 
-  res.status(200).json(new ApiSuccess((200, "User Fetched Successfully", existingUser)));
+  res.status(200).json(new ApiSuccess(200, "User Fetched Successfully", existingUser));
 });
 
 export const updateUser = AsyncHandler(async (req, res) => {
