@@ -39,7 +39,6 @@ const ViewProfile = () => {
       token:user?.token
     })
 
-    console.log(response)
   }
   useEffect(()=>{
     if(user?.token){

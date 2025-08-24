@@ -20,7 +20,6 @@ const Chat = () => {
     setText("");
     setChat((prev) => [...prev, { role: "user", parts: [{ text }] }]);
     const response = await ChatWithAI(chat, text);
-    console.log(response);
 
     setChat((prev) => [
       ...prev,

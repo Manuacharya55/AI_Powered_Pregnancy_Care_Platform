@@ -31,7 +31,6 @@ const ViewProgram = () => {
       data: "",
       token: user?.token,
     });
-    console.log(response);
     setData(response.data);
   };
 

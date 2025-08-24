@@ -49,7 +49,7 @@ const { response, error, loading, handleRequest } = useAxios();
       token: user?.token,
     });
 
-    console.log(response)
+
 
   };
 

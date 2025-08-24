@@ -72,7 +72,7 @@ const PaymentComponent = ({ id }) => {
       token: user?.token,
     });
 
-    console.log(response);
+
     toast.success("purchased successfully");
     setLoading(false);
   };

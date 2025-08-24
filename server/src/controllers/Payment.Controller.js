@@ -14,7 +14,6 @@ export const createPaymentIntents = AsyncHandler(async (req, res) => {
 
   const { paymentMethodId } = req.body;
 
-  console.log("HYYYYYY");
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new ApiError(400, "Invalid ID");
@@ -37,7 +36,6 @@ export const createPaymentIntents = AsyncHandler(async (req, res) => {
 
   const user = await User.findById(req.user._id);
 
-  console.log("hiiiiiiiiiiii",intent.id)
   const purchase = await Payment.create({
     program: existingProgram._id,
     user: req.user._id,
@@ -45,7 +43,6 @@ export const createPaymentIntents = AsyncHandler(async (req, res) => {
     paymentIntentID: intent.id,
   });
 
- console.log("hiiiiiiiiiiii",purchase)
   user.program.push(existingProgram._id)
   await user.save();
 

@@ -35,7 +35,7 @@ const Login = () => {
       email: "",
       password: "",
     });
-    console.log(response);
+
     setLocalStorage(response.data);
 
     if(response.data?.isAdmin){

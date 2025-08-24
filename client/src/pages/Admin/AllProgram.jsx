@@ -32,7 +32,7 @@ const AllProgram = () => {
       data: "",
       token: user?.token,
     });
-    console.log(response);
+
     setData(response.data);
   };
 
@@ -54,8 +54,7 @@ const AllProgram = () => {
       data: { ...program, avatar: image },
       token: user?.token,
     });
-    console.log(response);
-    setData((prev) => {
+   setData((prev) => {
       return [response.data, ...prev];
     });
 

@@ -21,7 +21,6 @@ const ProgramCheckout = () => {
       token: user?.token,
     });
 
-    console.log(response);
     setData(response.data);
   };
 

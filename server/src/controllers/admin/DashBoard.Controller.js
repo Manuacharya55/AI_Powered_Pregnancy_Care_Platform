@@ -8,7 +8,6 @@ import { AsyncHandler } from "../../utils/AsyncHandler.js";
 
 // fetch dashboard things
 export const fetchDashboard = AsyncHandler(async (req, res) => {
-  console.log("hiiii")
   const totalUsers = await User.countDocuments();
   const totalProgram = await Program.countDocuments();
   const totalBlogs = await Blog.countDocuments();

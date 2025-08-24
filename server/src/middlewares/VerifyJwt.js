@@ -28,13 +28,13 @@ export const verifyJWT = AsyncHandler(async(req,res,next)=>{
 
  
     req.user = existingUser;
-    console.log("hiii");
+
 
     next();
 })
 
 export const verifyAdmin = AsyncHandler(async(req,res,next)=>{
-    console.log("heyyyy")
+
     if(!req.user.isAdmin){
         throw new ApiError(403,"Forbidden Access")
     }

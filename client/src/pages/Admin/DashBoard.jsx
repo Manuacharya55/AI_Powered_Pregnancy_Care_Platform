@@ -22,7 +22,6 @@ const DashBoard = () => {
         })
 
         setData(response?.data)
-        console.log(response?.data)
     }
 
     useEffect(()=>{

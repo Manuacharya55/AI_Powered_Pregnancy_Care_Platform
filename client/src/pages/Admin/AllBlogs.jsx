@@ -20,7 +20,6 @@ const AllBlogs = () => {
       token: user?.token,
     });
 
-    console.log(response.data)
     setData(response.data);
   };
 

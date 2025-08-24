@@ -21,7 +21,6 @@ const ViewSingleBlog = () => {
       token: user?.token,
     });
 
-    console.log(response);
     setBlogs(response.data);
   };
 

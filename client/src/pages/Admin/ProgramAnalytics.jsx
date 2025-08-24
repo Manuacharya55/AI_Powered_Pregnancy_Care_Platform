@@ -16,14 +16,14 @@ const ProgramAnalytics = () => {
 const fetchProgram =async()=>{
   if(!user?.token || !id) return
 
-  console.log("hiii")
+
   const response = await handleRequest({
     method:'get',
     url:`program/analytics/${id}`,
     data:'',
     token:user?.token
   })
-  console.log(response)
+
   setData(response.data)
 }
 

@@ -112,11 +112,9 @@ export const deleteBlog = AsyncHandler(async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    console.log("herrerer")
     throw new ApiError(400, "Not A Valid ID");
   }
 
-  console.log("deleteing")
   const existingBlog = await Blog.findById(id);
 
   if (!existingBlog) {

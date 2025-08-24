@@ -25,7 +25,6 @@ const EditBlog = () => {
       token: user?.token,
     });
 
-    console.log(response);
     setTitle(response?.data?.title);
     setImage(response?.data?.image);
     setDescription(response?.data?.description);
@@ -62,7 +61,6 @@ const EditBlog = () => {
     if (!title || !description || !image) {
       return;
     }
-    console.log("heyyyy");
 
     if (!user?.token) {
       return;
@@ -75,7 +73,6 @@ const EditBlog = () => {
       token: user?.token,
     });
 
-    console.log(response);
     if (!error) toast.success(response.message);
     navigate(-1)
   };

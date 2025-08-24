@@ -26,7 +26,6 @@ const { loading, response, error, handleRequest } = useAxios();
       data: "",
       token: user?.token,
     });
-    console.log(response);
     setData(response.data);
   };
 

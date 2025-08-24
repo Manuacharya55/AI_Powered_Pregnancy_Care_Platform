@@ -56,7 +56,6 @@ const EditProfile = () => {
       data: { ...data, avatar },
       token: user?.token,
     });
-    console.log(response);
     setLocalStorage(response.data);
     navigate(-1);
   };
@@ -69,7 +68,6 @@ const EditProfile = () => {
   useEffect(() => {
     if (user?.token) {
       fetchData();
-      console.log("fetched");
     }
   }, [user?.token]);
 
