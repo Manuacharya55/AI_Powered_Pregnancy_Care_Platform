@@ -21,6 +21,8 @@ import Chat from "./pages/Chat/Chat";
 import UserLayout from "./Layouts/UserLayout";
 import AdminLayout from "./Layouts/AdminLayout";
 import AllBlogs from "./pages/Admin/AllBlogs";
+import CommentForm from "./components/Blog/CommentForm";
+import MyPrograms from "./pages/Program/MyPrograms";
 
 function App() {
   return (
@@ -143,6 +145,14 @@ function App() {
           }
         />
         <Route
+          path="/my-program"
+          element={
+            <UserLayout>
+              <MyPrograms />
+            </UserLayout>
+          }
+        />
+        <Route
           path="/checkout/:id"
           element={
             <UserLayout>
@@ -165,6 +175,15 @@ function App() {
           element={
             <UserLayout>
               <Chat />
+            </UserLayout>
+          }
+        />
+
+        <Route
+          path="/comment"
+          element={
+            <UserLayout>
+              <CommentForm />
             </UserLayout>
           }
         />

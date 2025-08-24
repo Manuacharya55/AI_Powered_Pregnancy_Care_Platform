@@ -12,7 +12,8 @@ export const fetchAllBlogs = AsyncHandler(async (req, res) => {
   const limit = Number(req.query.limit) || 12;
   const skip = (page - 1) * 10;
 
-  const blogs = await Blog.find({ author: { $ne: _id }, isActive: true }).populate("author")
+  const blogs = await Blog.find({ author: { $ne: _id }, isActive: true })
+    .populate("author")
     .skip(skip)
     .limit(limit);
 
@@ -29,7 +30,10 @@ export const fetchSingleBlog = AsyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid ID");
   }
 
-  const blog = await Blog.findById(id).populate("author");
+  const blog = await Blog.findById(id).populate([
+    { path: "author" },
+    { path: "comments.user", select: "name avatar email" },
+  ]);
 
   if (!blog) {
     throw new ApiError(400, "No Such Blogs");
@@ -108,9 +112,11 @@ export const deleteBlog = AsyncHandler(async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
+    console.log("herrerer")
     throw new ApiError(400, "Not A Valid ID");
   }
 
+  console.log("deleteing")
   const existingBlog = await Blog.findById(id);
 
   if (!existingBlog) {
@@ -128,4 +134,38 @@ export const deleteBlog = AsyncHandler(async (req, res) => {
   );
 
   res.status(200).json(new ApiSuccess(200, "Blog Deleted Successfully", blog));
+});
+
+export const addComment = AsyncHandler(async (req, res) => {
+  const { comment } = req.body;
+  const { id } = req.params;
+  const { _id } = req.user;
+
+  if (!comment) {
+    throw new ApiError(400, "Empty Comment");
+  }
+
+  const existingBlog = await Blog.findById(id);
+
+  if (!existingBlog) {
+    throw new ApiError(400, "No Such Blog");
+  }
+
+  existingBlog.comments.push({ user: _id, comment });
+  await existingBlog.save();
+  await existingBlog.populate({
+    path: "comments.user",
+    select: "name avatar email",
+  });
+
+  const length = existingBlog.comments.length - 1;
+  res
+    .status(200)
+    .json(
+      new ApiSuccess(
+        200,
+        "Comment Added Successfully",
+        existingBlog.comments[length]
+      )
+    );
 });

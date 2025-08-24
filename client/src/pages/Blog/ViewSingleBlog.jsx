@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import useAxios from "../../hooks/useAxios";
 import { useParams } from "react-router-dom";
 import Back from "../../components/Back";
-
+import CommentForm from "../../components/Blog/CommentForm";
 
 const ViewSingleBlog = () => {
   const { user } = useAuth();
@@ -21,8 +21,8 @@ const ViewSingleBlog = () => {
       token: user?.token,
     });
 
-    console.log(response)
-    setBlogs(response.data)
+    console.log(response);
+    setBlogs(response.data);
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const ViewSingleBlog = () => {
   return (
     <div id="blog">
       <div id="blog-holder">
-        <Back/>
+        <Back />
         <div id="container">
           <h1>{blogs?.title}</h1>
 
@@ -65,6 +65,8 @@ const ViewSingleBlog = () => {
             </div>
           </div>
         </div>
+
+        <CommentForm id={blogs._id} usercomments={blogs.comments} />
       </div>
     </div>
   );

@@ -37,7 +37,12 @@ const Login = () => {
     });
     console.log(response);
     setLocalStorage(response.data);
-    navigate("/home");
+
+    if(response.data?.isAdmin){
+      navigate("/dashboard");
+    }else{
+      navigate("/home");
+    }
   };
 
   return (

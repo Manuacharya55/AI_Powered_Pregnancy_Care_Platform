@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
+import { REASONS, TESTEMONIALS } from "../utils/placholder";
+import {gsap} from "gsap";
 
 const HomePage = () => {
   const navigate = useNavigate();
+   const textRef = useRef(null);
+
+  useEffect(() => {
+    const textWidth = textRef.current.offsetWidth;
+    const viewportWidth = window.innerWidth;
+
+    // GSAP animation
+    gsap.fromTo(
+      textRef.current,
+      { x: viewportWidth }, // Start off-screen (right side)
+      {
+        x: -textWidth, // End off-screen (left side)
+        duration: 20, // Adjust speed of the movement
+        repeat: -1, // Infinite repeat
+        ease: "linear", // Smooth and consistent movement
+      }
+    );
+  }, []);
 
   return (
     <div id="page">
       <div id="banner">
-        <span>A beautiful journey of love and new beginnings</span>
+        <span ref={textRef}>A beautiful journey of love and new beginnings</span>
       </div>
       <div id="banner-image">
         <img src="home.jpg" alt="" />
@@ -20,26 +40,13 @@ const HomePage = () => {
           More Than Promises <br /> Real Benefits for You
         </span>
         <div id="container">
-          <Card
-            index={1}
-            title={"Reason"}
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor"
-          />
-          <Card
-            index={1}
-            title={"Reason"}
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor"
-          />
-          <Card
-            index={1}
-            title={"Reason"}
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor"
-          />
-          <Card
-            index={1}
-            title={"Reason"}
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor"
-          />
+          {REASONS.map((curEle, index) => (
+            <Card
+              index={index + 1}
+              title={curEle.reason}
+              description={curEle.description}
+            />
+          ))}
         </div>
       </div>
       <div id="testimonial">
@@ -50,85 +57,14 @@ const HomePage = () => {
         </span>
 
         <div id="container">
-          <Card
-            profile={
-              "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-            }
-            title="Jhon Doe"
-            description={
-              "Lorem ipsum dolor sit amet consectetur , adipisicing elit . Doloremque laudantium obcaecati facilis expedita , odio cumqueomnis. Libero illum repellat earum."
-            }
-          />
-          <Card
-            profile={
-              "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-            }
-            title="Jhon Doe"
-            description={
-              "Lorem ipsum dolor sit amet consectetur , adipisicing elit . Doloremque laudantium obcaecati facilis expedita , odio cumqueomnis. Libero illum repellat earum."
-            }
-          />
-          <Card
-            profile={
-              "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-            }
-            title="Jhon Doe"
-            description={
-              "Lorem ipsum dolor sit amet consectetur , adipisicing elit . Doloremque laudantium obcaecati facilis expedita , odio cumqueomnis. Libero illum repellat earum."
-            }
-          />
-          <Card
-            profile={
-              "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-            }
-            title="Jhon Doe"
-            description={
-              "Lorem ipsum dolor sit amet consectetur , adipisicing elit . Doloremque laudantium obcaecati facilis expedita , odio cumqueomnis. Libero illum repellat earum."
-            }
-          />
-        </div>
-      </div>
-      <div id="program">
-        <span id="title">
-          Not One-Size-Fits-All <br /> Programs Tailored for You
-        </span>
-        <div id="container">
-          <Card
-            profile="https://plus.unsplash.com/premium_photo-1664299350663-9a5648f66c2c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8"
-            title="Yoga"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Excepturi, nostrum?"
-            price={400}
-            button={"buy now"}
-            handleClick={() => navigate(`/`)}
-          />
-          <Card
-            profile="https://plus.unsplash.com/premium_photo-1664299350663-9a5648f66c2c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8"
-            title="Yoga"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Excepturi, nostrum?"
-            price={400}
-            button={"buy now"}
-            handleClick={() => navigate(`/`)}
-          />
-          <Card
-            profile="https://plus.unsplash.com/premium_photo-1664299350663-9a5648f66c2c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8"
-            title="Yoga"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Excepturi, nostrum?"
-            price={400}
-            button={"buy now"}
-            handleClick={() => navigate(`/`)}
-          />
-          <Card
-            profile="https://plus.unsplash.com/premium_photo-1664299350663-9a5648f66c2c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8"
-            title="Yoga"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Excepturi, nostrum?"
-            price={400}
-            button={"buy now"}
-            handleClick={() => navigate(`/`)}
-          />
+          {TESTEMONIALS.map((curEle, index) => (
+            <Card
+              profile={curEle.image}
+              title={curEle.name}
+              description={curEle.description}
+            />
+          ))}
+
         </div>
       </div>
     </div>

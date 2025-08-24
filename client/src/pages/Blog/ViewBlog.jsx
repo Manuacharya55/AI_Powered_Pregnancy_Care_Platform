@@ -6,6 +6,7 @@ import BlogCard from "../../components/Blog/BlogCard";
 import { NavLink } from "react-router-dom";
 
 const ViewBlog = () => {
+  const [page, setPage] = useState(1);
   const { user } = useAuth();
   const { response, error, loading, handleRequest } = useAxios();
   const [blogs, setBlogs] = useState([]);
@@ -15,7 +16,7 @@ const ViewBlog = () => {
 
     const response = await handleRequest({
       method: "get",
-      url: "blog/",
+      url: `blog?page=${page}`,
       token: user?.token,
     });
 
@@ -26,7 +27,7 @@ const ViewBlog = () => {
     if (user?.token) {
       fetchBlogs();
     }
-  }, [user?.token]);
+  }, [user?.token,page]);
 
   useEffect(() => {
     response && console.log(response);
@@ -38,9 +39,7 @@ const ViewBlog = () => {
     <div id="blog">
       <div id="blog-holder">
         <div id="container">
-          <span id="title">
-            See what’s on everyone’s mind
-          </span>
+          <span id="title">See what’s on everyone’s mind</span>
         </div>
 
         {blogs?.length > 0 ? (
@@ -54,7 +53,30 @@ const ViewBlog = () => {
         ) : (
           "No Blogs Yet"
         )}
+        <div id="btn-holder">
+        {page > 1 && (
+          <button
+            id="pg-btn"
+            onClick={() => {
+              setPage((prev) => prev - 1);
+            }}
+          >
+            previous
+          </button>
+        )}
+        {blogs.length == 12 && (
+          <button
+            id="pg-btn"
+            onClick={() => {
+              setPage((prev) => prev + 1);
+            }}
+          >
+            next
+          </button>
+        )}
       </div>
+      </div>
+
     </div>
   );
 };

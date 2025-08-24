@@ -29,6 +29,18 @@ const ViewProfile = () => {
     navigate(`/edit-blog/${id}`)
   }
 
+  const handleDelete = async(id) => {
+    if(!user?.token) return
+
+    const response = await handleRequest({
+      method : 'delete',
+      url:`blog/${id}`,
+      data:'',
+      token:user?.token
+    })
+
+    console.log(response)
+  }
   useEffect(()=>{
     if(user?.token){
         fetchBlogs()
@@ -39,7 +51,7 @@ const ViewProfile = () => {
     <div id="blog">
       <div id="container">
         <div id="profile-card-holder">
-          <ProfileCard></ProfileCard>
+          <ProfileCard/>
         </div>
         <div id="profile-blog-holder">
           <span id="title">My Blogs</span>
@@ -47,7 +59,7 @@ const ViewProfile = () => {
             {blogs?.length > 0 ? (
           <div id="container">
             {blogs.map((curele) => (
-                <BlogCard key={curele._id} data={curele} isAuthor={true} handleEdit={handleEdit}/>
+                <BlogCard key={curele._id} data={curele} isAuthor={true} handleEdit={handleEdit} handleDelete={handleDelete}/>
             ))}
           </div>
         ) : (

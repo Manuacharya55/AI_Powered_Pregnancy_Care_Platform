@@ -6,6 +6,7 @@ import { ApiSuccess } from "../../utils/ApiSuccess.js";
 import { AsyncHandler } from "../../utils/AsyncHandler.js";
 import { generate } from "../../utils/Gemini.js";
 import Payment from "../../models/Payment.Model.js";
+import User from "../../models/User.model.js";
 
 export const addProgram = AsyncHandler(async (req, res) => {
   const { avatar, name, price, description } = req.body;
@@ -22,10 +23,10 @@ export const addProgram = AsyncHandler(async (req, res) => {
 
   const response = await generate(name, description);
 
- for (let i = 0; i < response.length; i++) {
-  const week = await Weeks.create({ ...response[i], program: program._id });
-  program.weeks.push(week._id);
-}
+  for (let i = 0; i < response.length; i++) {
+    const week = await Weeks.create({ ...response[i], program: program._id });
+    program.weeks.push(week._id);
+  }
 
   const data = await program.save();
 
@@ -35,36 +36,59 @@ export const addProgram = AsyncHandler(async (req, res) => {
 });
 
 export const getProgram = AsyncHandler(async (req, res) => {
-  const program = await Program.find().select("-weeks").sort({createdAt:-1});
+  const program = await Program.find().select("-weeks").sort({ createdAt: -1 });
   res
     .status(200)
     .json(new ApiSuccess(200, "Programs Fetched Successfully", program));
 });
 
 export const getProgramAnalytics = AsyncHandler(async (req, res) => {
-    const {id} = req.params;
+  const { id } = req.params;
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        throw new ApiError(400,"NO SUCH ID")
-    }
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new ApiError(400, "NO SUCH ID");
+  }
   const program = await Program.findById(id).populate("weeks");
-    const purchase = await Payment.find({program:id}).populate("user")
+  const purchase = await Payment.find({ program: id }).populate("user");
 
-  const data = {program,purchase}
+  const data = { program, purchase };
   res
     .status(200)
     .json(new ApiSuccess(200, "Programs Fetched Successfully", data));
 });
 
 export const getSingleProgram = AsyncHandler(async (req, res) => {
-    const {id} = req.params;
+  const { id } = req.params;
+  const page = parseInt(req.query.page) || 1;
+  const limit = 4;
+  const skip = (page - 1) * limit;
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        throw new ApiError(400,"NO SUCH ID")
-    }
-  const program = await Program.findById(id).populate("weeks");
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new ApiError(400, "NO SUCH ID");
+  }
+  const program = await Program.findById(id).populate({
+    path: "weeks",
+    options: {
+      skip: skip,
+      limit: limit,
+    },
+  });
 
   res
     .status(200)
     .json(new ApiSuccess(200, "Programs Fetched Successfully", program));
+});
+
+export const getMyProgram = AsyncHandler(async (req, res) => {
+  const { _id } = req.user;
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    throw new ApiError(400, "NO SUCH ID");
+  }
+
+  const user = await User.findById(_id).populate("program");
+
+  res
+    .status(200)
+    .json(new ApiSuccess(200, "Programs Fetched Successfully", user.program));
 });

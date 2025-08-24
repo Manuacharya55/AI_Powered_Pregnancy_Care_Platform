@@ -23,14 +23,14 @@ const BlogSchema = new Schema({
     type: Boolean,
     default: true,
   },
-  review: [
+  comments: [
     {
       user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
       },
-      text: {
+      comment: {
         type: String,
         required: true,
       },

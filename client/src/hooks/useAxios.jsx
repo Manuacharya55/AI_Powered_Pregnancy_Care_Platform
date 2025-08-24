@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const useAxios = () => {
   const [response, setResponse] = useState(null);
@@ -23,14 +24,16 @@ const useAxios = () => {
       });
 
       if(response.data.success){
-        console.log(response.data)
+        toast.success(response.message)
         setResponse(response.data)
         return response.data
       }else{
         setError(response.data.message)
+        toast(response.data.message)
       }
     } catch (error) {
         console.log(error.message)
+        toast.error(error.message)
         setError(error.message)
     }finally{
         setLoading(false)

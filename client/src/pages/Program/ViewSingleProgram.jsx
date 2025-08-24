@@ -1,53 +1,81 @@
-import React from 'react'
-import useAxios from '../../hooks/useAxios'
-import { useAuth } from '../../context/AuthContext';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Accordion from '../../components/Program/Accordion';
+import React from "react";
+import useAxios from "../../hooks/useAxios";
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Accordion from "../../components/Program/Accordion";
+import Back from "../../components/Back";
 
 const ViewSingleProgram = () => {
-  const {loading,error,response,handleRequest} = useAxios();
-  const {user} = useAuth();
-  const [data,setData] = useState();
-  const {id} = useParams()
+  const { loading, error, response, handleRequest } = useAxios();
+  const { user } = useAuth();
+  const [data, setData] = useState();
+  const { id } = useParams();
+  const [page, setPage] = useState(1);
 
-const fetchProgram =async()=>{
-  if(!user?.token || !id) return
+  const fetchProgram = async () => {
+    if (!user?.token || !id) return;
 
-  console.log("hiii")
-  const response = await handleRequest({
-    method:'get',
-    url:`program/analytics/${id}`,
-    data:'',
-    token:user?.token
-  })
-  console.log(response)
-  setData(response.data)
-}
+    const response = await handleRequest({
+      method: "get",
+      url: `program/${id}?page=${page}`,
+      data: "",
+      token: user?.token,
+    });
+    console.log(response);
+    setData(response.data);
+  };
 
-  useEffect(()=>{
-    if(user?.token){
+  useEffect(() => {
+    if (user?.token) {
       fetchProgram();
     }
-  },[user?.token,id])
+  }, [user?.token, id,page]);
 
-  return loading ?"Loading..." : (
+  return loading ? (
+    "Loading..."
+  ) : (
     <div id="blog">
-      <div id="dot"></div>
       <div id="container">
-        <span id="title">{data.program.name}</span>
+        <span id="title">
+          <Back/>
+          {data?.name}</span>
 
         <div id="week-holder">
-          {data?.program.weeks.map(curele => (
-            <Accordion weekNumber={curele.weekNumber} details={curele.details}/>
-          )
-
+          {data?.weeks.map((curele) => (
+            <Accordion
+              weekNumber={curele.weekNumber}
+              details={curele.details}
+              key={curele._id}
+            />
+          ))}
+        </div>
+        <div id="btn-holder">
+          {page > 1 && (
+            <button
+              id="pg-btn"
+              onClick={() => {
+                setPage((prev) => prev - 1);
+              }}
+            >
+              previous
+            </button>
+          )}
+          {data?.weeks?.length == 4 && (
+            <button
+              id="pg-btn"
+              onClick={() => {
+                setPage((prev) => prev + 1);
+              }}
+            >
+              next
+            </button>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ViewSingleProgram
+export default ViewSingleProgram;

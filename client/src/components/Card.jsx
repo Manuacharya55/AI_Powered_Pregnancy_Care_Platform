@@ -14,7 +14,7 @@ const Card = ({
     <div className="card background">
       <div className="card-image">{img && <img src={img} alt="" />}</div>
       <div className="card-content" style={price && { textAlign: "center" }}>
-        {index && <span className="index">01</span>}
+        {index && <span className="index">0{index}</span>}
         {profile && <img src={profile} alt="" className="profile-img" />}
         <span className="lg-title">{title}</span>
         <p className="description">{description}</p>

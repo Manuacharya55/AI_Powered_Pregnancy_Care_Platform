@@ -85,3 +85,49 @@
 #cus-img {
   display: none;
 }
+
+/* Comment Component */
+#comment{
+  width: 100%;
+  padding: 20px;
+}
+
+#comment-form,#comment-holder {
+  max-width: 600px;
+  display: block;
+  margin: auto;
+}
+
+#comment-form{
+  padding-top: 30px;
+}
+
+#comment-holder{
+  /* display: grid;
+  grid-template-columns: auto auto;
+  gap: 15px; */
+}
+.user-comment{
+  margin-top: 15px;
+}
+.user-comment .user-profile{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.user-comment .user-profile img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-comment .user-description span{
+  display: block;
+}
+
+.user-comment .description{
+  padding: 25px;
+}

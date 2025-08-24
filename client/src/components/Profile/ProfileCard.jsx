@@ -17,6 +17,13 @@ const ProfileCard = () => {
       >
         edit
       </button>
+      <button id="operation"
+        onClick={async () => {
+          navigate(`/my-program`);
+        }}
+      >
+        Go To My Program
+      </button>
     </div>
   );
 };
