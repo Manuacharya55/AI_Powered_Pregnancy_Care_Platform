@@ -2,26 +2,23 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const ProfileCard = () => {
-  const {user} = useAuth();
-  const navigate = useNavigate()
+  const { user } = useAuth();
+  const navigate = useNavigate();
   return (
     <div id="profile-card">
       <img src={user?.avatar} alt="" />
       <div id="profile-details">
-        <h3>{user?.name}</h3>
-        <p>{user?.email}</p>
+        <span id="user-name">{user?.name}</span>
       </div>
-      <div id="operation">
-        <button
-          onClick={async() => {
-            navigate(`/edit-profile`)
-          }}
-        >
-          edit
-        </button>
-      </div>
+      <button id="operation"
+        onClick={async () => {
+          navigate(`/edit-profile`);
+        }}
+      >
+        edit
+      </button>
     </div>
-  )
+  );
 };
 
 export default ProfileCard;

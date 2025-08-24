@@ -11,6 +11,8 @@ import AuthRouter from "./routes/Auth.router.js";
 import BlogRouter from "./routes/Blog.Router.js";
 import HomePageRouter from "./routes/HomePage.Router.js";
 import AdminRouter from "./routes/Admin.Router.js";
+import ProgramRouter from "./routes/Program.Router.js";
+import PaymentRouter from "./routes/Payment.Router.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,6 +30,8 @@ app.use("/api/v1/auth",AuthRouter)
 app.use("/api/v1/blog",BlogRouter)
 app.use("/api/v1/homepage",HomePageRouter)
 app.use("/api/v1/admin",AdminRouter)
+app.use("/api/v1/program",ProgramRouter)
+app.use("/api/v1/payment",PaymentRouter)
 
 
 

@@ -76,14 +76,14 @@ const EditBlog = () => {
     });
 
     console.log(response);
-    if (!error) toast.success("done");
+    if (!error) toast.success(response.message);
     navigate(-1)
   };
 
   return (
     <div id="blog">
       <div id="blog-holder">
-        <span id="title" style={{ textAlign: "center" }}>
+        <span id="title">
           Refine your thoughts here.
         </span>
         <div id="container">

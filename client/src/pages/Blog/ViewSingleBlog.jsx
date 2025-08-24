@@ -41,7 +41,6 @@ const ViewSingleBlog = () => {
 
   return (
     <div id="blog">
-      <div id="dot"></div>
       <div id="blog-holder">
         <Back/>
         <div id="container">

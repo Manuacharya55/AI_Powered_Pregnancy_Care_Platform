@@ -3,7 +3,7 @@ import React from "react";
 const Table = ({ keys, data, heading, page, setPage }) => {
   return (
     <>
-      <table>
+      <table className="background">
         <thead>
           <tr>
             {heading?.map((curEle) => (
@@ -17,7 +17,7 @@ const Table = ({ keys, data, heading, page, setPage }) => {
               {keys?.map((ele) => {
                 return ele == "avatar" ? (
                   <td>
-                    <img src={curEle[ele]} />
+                    <img src={curEle.avatar} />
                   </td>
                 ) : (
                   <td>{curEle[ele]}</td>

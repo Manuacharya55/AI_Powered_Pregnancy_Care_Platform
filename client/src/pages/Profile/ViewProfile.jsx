@@ -37,8 +37,6 @@ const ViewProfile = () => {
 
   return (
     <div id="blog">
-      <div id="dot"></div>
-      <NavBar></NavBar>
       <div id="container">
         <div id="profile-card-holder">
           <ProfileCard></ProfileCard>

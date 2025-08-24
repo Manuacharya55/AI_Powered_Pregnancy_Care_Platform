@@ -8,12 +8,13 @@ const BlogCard = ({
   handleDelete,
 }) => {
   return (
-    <div id="card">
-      <div id="card-img">
+    <div className="card background">
+      <div className="card-image">
         <img src={data.image} alt="" />
       </div>
-      <h3>{data.title}</h3>
-      {!isAuthor && (
+      <div className="card-content">
+      <span className="sm-title">{data.title}</span>
+        {!isAuthor && (
         <div id="details">
           <div id="user-profile">
             <img src={data.author?.avatar} alt="" id="profile-img" />
@@ -26,13 +27,14 @@ const BlogCard = ({
       )}
 
       {isAuthor && (
-        <div id="operation">
-          <button onClick={()=>handleEdit(data?._id)}>Edit</button>
-          <button id="delete" onClick={()=>handleDelete(data?._id)}>
+        <div className="blog-op">
+          <button onClick={()=>handleEdit(data?._id)} className="edit">Edit</button>
+          <button className="delete" onClick={()=>handleDelete(data?._id)}>
             Delete
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 };

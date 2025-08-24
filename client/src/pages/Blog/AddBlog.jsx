@@ -57,7 +57,7 @@ const { response, error, loading, handleRequest } = useAxios();
     <div id="blog">
       <div id="dot"></div>
       <div id="blog-holder">
-        <span id="title" style={{ textAlign: "center" }}>
+        <span id="title">
           What’s on Your Mind Today?
         </span>
         <div id="container">

@@ -19,7 +19,7 @@ const ViewBlog = () => {
       token: user?.token,
     });
 
-    setBlogs(response.data)
+    setBlogs(response.data);
   };
 
   useEffect(() => {
@@ -36,11 +36,12 @@ const ViewBlog = () => {
 
   return (
     <div id="blog">
-      <div id="dot"></div>
       <div id="blog-holder">
-        <span id="title" style={{ marginBottom: "20px", textAlign: "center" }}>
-          See what’s on everyone’s mind
-        </span>
+        <div id="container">
+          <span id="title">
+            See what’s on everyone’s mind
+          </span>
+        </div>
 
         {blogs?.length > 0 ? (
           <div id="container">

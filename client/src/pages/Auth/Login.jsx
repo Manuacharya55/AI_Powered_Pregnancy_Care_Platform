@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Form from "../components/Form";
-import { LOGIN } from "../utils/placholder";
-import useAxios from "../hooks/useAxios";
+import Form from "../../components/Form";
+import { LOGIN } from "../../utils/placholder";
+import useAxios from "../../hooks/useAxios";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const { response, error, loading, handleRequest } = useAxios();
@@ -53,7 +53,7 @@ const Login = () => {
           loading={loading}
         />
         <span id="link">
-          Don't have an account ? <NavLink>Register Here</NavLink>
+          Don't have an account ? <NavLink to="/register">Register Here</NavLink>
         </span>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {loading && <p style={{ color: "red" }}>Processing...</p>}

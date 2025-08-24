@@ -1,11 +1,12 @@
 import React from 'react'
 // import { USERNAVBAR } from '../utils/placholder'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { RiHomeHeartLine } from "react-icons/ri";
 import { TbBrandMiniprogram } from "react-icons/tb";
 import { BsChatQuote } from "react-icons/bs";
 import { RiBloggerLine } from "react-icons/ri";
+import { useAuth } from '../context/AuthContext';
 
 export const USERNAVBAR = [
   {
@@ -16,7 +17,7 @@ export const USERNAVBAR = [
   {
     icon: <TbBrandMiniprogram />,
     text: "program",
-    link: "/program",
+    link: "/programs",
   },
   {
     icon: <BsChatQuote />,
@@ -29,22 +30,34 @@ export const USERNAVBAR = [
     text: "blog",
     link: "/blog",
   },
+  {
+    icon: <RiBloggerLine />,
+    text: "profile",
+    link: "/profile",
+  },
 ];
 
-const NavBar = () => {
+const NavBar = ({array}) => {
+  const {clearLocalStorage} = useAuth();
+  const navigate = useNavigate()
   return (
     <div id="navbar">
         <nav>
             <h1 id="logo">Logo</h1>
 
             <ul>
-                {USERNAVBAR.map(curEle => <li>
+                {array.map(curEle => <li>
                     <NavLink to={curEle.link}>
                     {curEle.icon}
                     {curEle.text}
                     </NavLink>
                 </li>)}
             </ul>
+
+            <button onClick={()=>{
+              clearLocalStorage()
+              navigate("/")
+            }}>logout</button>
         </nav>
     </div>
   )

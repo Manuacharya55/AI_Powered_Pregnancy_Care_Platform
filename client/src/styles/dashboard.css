@@ -13,7 +13,7 @@
   flex-wrap: wrap;
 }
 
-#dashboard #tile {
+#dashboard .tile {
   max-width: 300px;
   width: 100%;
   padding: 20px;
@@ -21,27 +21,16 @@
   flex-direction: column;
 }
 
-#dashboard #tile,
-#dashboard #latest ,table{
-  background: rgba(46, 46, 46, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.208);
-}
-
-#tile #count,
+.tile #count,
 #dashboard #latest {
   font-size: 6rem;
   font-weight: 700;
   text-align: center;
 }
-
-#tile #field {
+.tile #field {
   font-size: 1.3rem;
   text-align: center;
 }
-
 #latest-holder {
   padding : 20px;
   display: grid;
@@ -50,7 +39,7 @@
   gap: 30px;
 }
 
-#dashboard #latest {
+#dashboard .latest {
   padding: 20px;
   text-align: left;
 }
@@ -67,7 +56,6 @@
 
 
 /* Table styling */
-
 table{
     width: 100%;
     border-collapse: collapse;
@@ -81,7 +69,7 @@ table{
  }
 
  th{
-    padding: 10px 20px;
+    padding: 20px 20px;
  }
 
  td{
@@ -112,4 +100,31 @@ table{
     background-color: var(--primary-color);
     border-radius: 25px;
     color: var(--text-color);
+ }
+
+ #week-holder{
+  width: 100%;
+ }
+
+ .accordion{
+  width: 100%;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+ }
+
+ .accordion span{
+  display: block;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  font-size: 1.5rem;
+ }
+ .accordion h3{
+  font-size: 3rem;
+  margin-bottom: 10px;
+ }
+
+ .accordion p{
+  text-align: justify;
  }

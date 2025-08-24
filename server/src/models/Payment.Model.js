@@ -1,25 +1,32 @@
-import { Schema,model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const PaymentSchema = new Schema({
-    program:{
-        type:Schema.Types.ObjectId,
-        ref:"Program",
-        required:true
+const PaymentSchema = new Schema(
+  {
+    program: {
+      type: Schema.Types.ObjectId,
+      ref: "Program",
+      required: true,
     },
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:"User",
-        required:true
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    amount:{
-        type:Number,
-        required:true
+    amount: {
+      type: Number,
+      required: true,
     },
-    date:{
-        type:Date,
-        default:Date.now()
-    }
-},{timestamps:true});
+    paymentIntentID: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  { timestamps: true }
+);
 
-const Payment = model("Payment",PaymentSchema);
+const Payment = model("Payment", PaymentSchema);
 export default Payment;

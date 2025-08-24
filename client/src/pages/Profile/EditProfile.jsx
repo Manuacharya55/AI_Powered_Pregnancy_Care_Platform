@@ -7,6 +7,7 @@ import Image from "../../components/Image";
 import { handleUpload } from "../../utils/Appwrite";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Back from "../../components/Back";
 
 const EditProfile = () => {
   const { loading, error, response, handleRequest } = useAxios();
@@ -76,8 +77,12 @@ const EditProfile = () => {
     "loading"
   ) : (
     <div id="blog">
-      <div id="dot"></div>
+
       <div id="container">
+        <span id="title">
+          <Back/>
+          Edit Profile
+          </span>
         <div id="edit-card">
           <form onSubmit={handleSubmit}>
             <Image image={data?.avatar} setImage={handleChange} />

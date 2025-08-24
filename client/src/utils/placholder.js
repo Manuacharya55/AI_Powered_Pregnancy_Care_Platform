@@ -29,31 +29,18 @@ export const LOGIN = [
   },
 ];
 
-import { RiHomeHeartLine } from "react-icons/ri";
-// export const USERNAVBAR = [
-//   {
-//     icon: <RiHomeHeartLine />,
-//     text: "home",
-//     link: "/home",
-//   },
-//   {
-//     icon: 2,
-//     text: "program",
-//     link: "/program",
-//   },
-//   {
-//     icon: 2,
-//     text: "chat",
-//     link: "/chat-with-ai",
-//   },
-//   {
-//     icon: 2,
-//     text: "contact",
-//     link: "/home",
-//   },
-//   {
-//     icon: 2,
-//     text: "blog",
-//     link: "/blogs",
-//   },
-// ];
+export const PROGRAM = [
+  {
+    name: "name",
+    placeholder: "Enter Program Name",
+    type: "text",
+  },{
+    name: "price",
+    placeholder: "Enter Price",
+    type: "number",
+  },{
+    name: "description",
+    placeholder: "Enter Program Description",
+    type: "text",
+  }
+]

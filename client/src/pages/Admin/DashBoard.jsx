@@ -4,6 +4,7 @@ import { useState } from 'react'
 import {useAuth} from "../../context/AuthContext"
 import useAxios from "../../hooks/useAxios"
 import Tile from '../../components/Admin/Tile';
+import Latest from '../../components/Admin/Latest';
 
 const DashBoard = () => {
     const [data,setData] = useState();
@@ -32,11 +33,8 @@ const DashBoard = () => {
 
     return loading ? "loading...." : (
         <div id="blog">
-            <div id="dot"></div>
             <div id="container">
-                <span id="title" style={{
-                    textAlign:"center"
-                }}>Dashboard</span>
+                <span id="title">Dashboard</span>
                 <div id="dashboard">
                     <div id="tile-holder">
                         <Tile count={data?.totalUsers} text={"Total Users"}/>
@@ -45,26 +43,14 @@ const DashBoard = () => {
                         <Tile count={data?.totalRevenue} text={"Total Revenue"}/>
                     </div>
                     <div id="latest-holder">
-                        <div id="latest">
-                            <h3 id='action'>Last User</h3>
-                            <p id='lt-title'>Username</p>
-                            <p id='lt-res'>manu@email.com</p>
-                        </div>
-                        <div id="latest">
-                            <h3 id='action'>Last Blog</h3>
-                            <p id='lt-title'>Title Of blog</p>
-                            <p id='lt-res'>Author : Manu</p>
-                        </div>
-                        <div id="latest">
-                            <h3 id='action'>Last Program</h3>
-                            <p id='lt-title'>Program Name</p>
-                            <p id='lt-res'>Price : price</p>
-                        </div>
-                        <div id="latest">
-                            <h3 id='action'>Last Payment</h3>
-                            <p id='lt-title'>Program Name</p>
-                            <p id='lt-res'>user : Manu</p>
-                        </div>
+                        <Latest title="Last User" name={data?.latestUser.name} data={data?.latestUser?.email}/>
+
+                        <Latest title="Last Blog" name={data?.latestBlog.title} data={data?.latestBlog.createdAt.split("T")[0]}/>
+
+                        <Latest title="Last Program" name={data?.latestProgram.name} data={data?.latestProgram.price}/>
+
+                        <Latest title="Last Payment" name={data?.latestPayment.amount} data={data?.latestPayment.createdAt.split("T")[0]}/>
+
                     </div>
                 </div>
             </div>

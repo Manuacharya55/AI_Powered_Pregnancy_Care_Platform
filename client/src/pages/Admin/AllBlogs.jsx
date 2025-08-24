@@ -1,12 +1,10 @@
-import React from "react";
-import Table from "../../components/Admin/Table";
-import { useAuth } from "../../context/AuthContext";
-import useAxios from "../../hooks/useAxios";
-import { useEffect } from "react";
-import { USER, USERKEY } from "../../utils/table";
-import { useState } from "react";
+import React, { useEffect, useState } from 'react'
+import { useAuth } from '../../context/AuthContext';
+import useAxios from '../../hooks/useAxios';
+import Table from '../../components/Admin/Table';
+import { BLOG, BLOGKEY } from '../../utils/table';
 
-const AllUsers = () => {
+const AllBlogs = () => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState();
   const { user } = useAuth();
@@ -17,11 +15,12 @@ const AllUsers = () => {
 
     const response = await handleRequest({
       method: "get",
-      url: `admin/users?page=${page}`,
+      url: `admin/blog?page=${page}`,
       data: "",
       token: user?.token,
     });
 
+    console.log(response.data)
     setData(response.data);
   };
 
@@ -35,11 +34,11 @@ const AllUsers = () => {
   ) : (
     <div id="blog">
       <div id="container">
-        <span id="title">All Users</span>
-        <Table keys={USERKEY} data={data} heading={USER} page={page} setPage={setPage}/>
+        <span id="title">All Blogs</span>
+        <Table keys={BLOGKEY} data={data} heading={BLOG} page={page} setPage={setPage}/>
       </div>
     </div>
   );
-};
+}
 
-export default AllUsers;
+export default AllBlogs

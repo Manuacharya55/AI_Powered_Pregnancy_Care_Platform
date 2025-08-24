@@ -11,7 +11,7 @@ const Form = ({ fields, handleSubmit,handleChange,data,loading }) => {
             placeholder={curEle.placeholder}
             onChange={handleChange}
             key={index}
-            value={data[curEle.name]}
+            value={data[curEle?.name]}
           />
         );
       })}
